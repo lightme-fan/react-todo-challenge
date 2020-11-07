@@ -47,7 +47,7 @@ function useTodo() {
         console.log(active);
     }
 
-    return [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete, setAllTodos]
+    return [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete, activeTodo, activeTodos]
 }
 
 export default useTodo

@@ -33892,8 +33892,25 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function All(props) {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, "All Todos"));
+function All(_ref) {
+  var allTodos = _ref.allTodos,
+      setAsComplete = _ref.setAsComplete;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, allTodos.map(function (todo) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "todo-item",
+      key: todo.id + todo.length + 1
+    }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+      type: "checkbox",
+      checked: todo.isCompleted,
+      onChange: function onChange() {
+        return setAsComplete(todo.id);
+      }
+    }), /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setAsComplete(todo.id);
+      }
+    }, todo.text)));
+  }));
 }
 
 var _default = All;
@@ -33920,7 +33937,7 @@ function Header() {
   }, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
     className: "todo-heading"
   }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/all"
+    to: "/"
   }, "All")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/active"
   }, "Active")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
@@ -33942,8 +33959,27 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function ActiveTodo(props) {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, "Active Todos"));
+function ActiveTodo(_ref) {
+  var allTodos = _ref.allTodos,
+      setAsComplete = _ref.setAsComplete;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, allTodos.filter(function (todo) {
+    return !todo.isCompleted;
+  }).map(function (todo) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "todo-item",
+      key: todo.id + todo.length + 1
+    }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+      type: "checkbox",
+      checked: todo.isCompleted,
+      onChange: function onChange() {
+        return setAsComplete(todo.id);
+      }
+    }), /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setAsComplete(todo.id);
+      }
+    }, todo.text)));
+  }));
 }
 
 var _default = ActiveTodo;
@@ -33962,46 +33998,37 @@ var _AddTodo = _interopRequireDefault(require("../AddTodo"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Complete() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, "Complete Todos"));
+function Complete(_ref) {
+  var allTodos = _ref.allTodos,
+      setAsComplete = _ref.setAsComplete,
+      deleteTodo = _ref.deleteTodo;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", null, "Delete All"), allTodos.filter(function (todo) {
+    return todo.isCompleted;
+  }).map(function (todo) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "todo-item",
+      key: todo.id + todo.length + 1
+    }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+      type: "checkbox",
+      checked: todo.isCompleted,
+      onChange: function onChange() {
+        return setAsComplete(todo.id);
+      }
+    }), /*#__PURE__*/_react.default.createElement("span", {
+      onClick: function onClick() {
+        return setAsComplete(todo.id);
+      }
+    }, todo.text), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        return deleteTodo(todo.id);
+      }
+    }, "Delete")));
+  }));
 }
 
 var _default = Complete;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../AddTodo":"components/AddTodo.js"}],"components/Todo.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function Todo(_ref) {
-  var id = _ref.id,
-      text = _ref.text,
-      checkBoxOnClick = _ref.checkBoxOnClick,
-      deleteOnClick = _ref.deleteOnClick;
-  return /*#__PURE__*/_react.default.createElement("li", {
-    className: "todo-item"
-  }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "checkbox",
-    onClick: checkBoxOnClick
-  }), /*#__PURE__*/_react.default.createElement("span", {
-    onClick: checkBoxOnClick
-  }, text), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: deleteOnClick
-  }, "Delete")));
-}
-
-var _default = Todo;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"components/useTodo.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../AddTodo":"components/AddTodo.js"}],"components/useTodo.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34102,7 +34129,7 @@ function useTodo() {
     console.log(active);
   }
 
-  return [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete, setAllTodos];
+  return [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete, activeTodo, activeTodos];
 }
 
 var _default = useTodo;
@@ -34129,8 +34156,6 @@ var _All = _interopRequireDefault(require("./src/All"));
 
 var _Complete = _interopRequireDefault(require("./src/Complete"));
 
-var _Todo = _interopRequireDefault(require("./Todo"));
-
 var _useTodo3 = _interopRequireDefault(require("./useTodo"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34138,8 +34163,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -34155,20 +34178,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function App() {
   var _useTodo = (0, _useTodo3.default)(),
-      _useTodo2 = _slicedToArray(_useTodo, 7),
+      _useTodo2 = _slicedToArray(_useTodo, 8),
       todo = _useTodo2[0],
       allTodos = _useTodo2[1],
       handleChange = _useTodo2[2],
       handleSubmit = _useTodo2[3],
       deleteTodo = _useTodo2[4],
       setAsComplete = _useTodo2[5],
-      setAllTodos = _useTodo2[6]; // function activeTodo() {
-  //     const notCmplete = allTodos.filter(todo => todo.isCompleted === false);
-  //     setAllTodos(notCmplete);
-  //     console.log(allTodos);
-  // }
-  // activeTodo()
-
+      activeTodo = _useTodo2[6],
+      activeTodos = _useTodo2[7];
 
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "container"
@@ -34177,30 +34195,28 @@ function App() {
     onChange: handleChange,
     onClick: handleSubmit
   }), /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_reactRouter.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
-    path: "/all"
-  }, /*#__PURE__*/_react.default.createElement(_All.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
+    exact: true,
+    path: "/"
+  }, /*#__PURE__*/_react.default.createElement(_All.default, {
+    allTodos: allTodos,
+    setAsComplete: setAsComplete
+  })), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: "/active"
-  }, /*#__PURE__*/_react.default.createElement(_Active.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_Active.default, {
+    allTodos: allTodos,
+    setAsComplete: setAsComplete
+  })), /*#__PURE__*/_react.default.createElement(_reactRouter.Route, {
     path: "/complete"
-  }, /*#__PURE__*/_react.default.createElement(_Complete.default, null))), /*#__PURE__*/_react.default.createElement("ul", {
-    className: "todo-list"
-  }, allTodos.map(function (todo) {
-    return /*#__PURE__*/_react.default.createElement(_Todo.default, _extends({
-      key: todo.id + todo.length + 1
-    }, todo, {
-      checkBoxOnClick: function checkBoxOnClick() {
-        return setAsComplete(todo.id);
-      },
-      deleteOnClick: function deleteOnClick() {
-        return deleteTodo(todo.id);
-      }
-    }));
-  })));
+  }, /*#__PURE__*/_react.default.createElement(_Complete.default, {
+    allTodos: allTodos,
+    setAsComplete: setAsComplete,
+    deleteTodo: deleteTodo
+  }))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router":"node_modules/react-router/esm/react-router.js","./AddTodo":"components/AddTodo.js","./Header":"components/Header.js","./src/Active":"components/src/Active.js","./src/All":"components/src/All.js","./src/Complete":"components/src/Complete.js","./Todo":"components/Todo.js","./useTodo":"components/useTodo.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router":"node_modules/react-router/esm/react-router.js","./AddTodo":"components/AddTodo.js","./Header":"components/Header.js","./src/Active":"components/src/Active.js","./src/All":"components/src/All.js","./src/Complete":"components/src/Complete.js","./useTodo":"components/useTodo.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -34242,7 +34258,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49936" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55251" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,9 +1,16 @@
 import React from 'react'
 
-function All(props) {
+function All({allTodos, setAsComplete}) {
     return (
-        <>
-            <h3>All Todos</h3>
+        <> 
+            {allTodos.map(todo => 
+                <div className='todo-item' key={todo.id+todo.length+1}>
+                    <label>
+                        <input type='checkbox' checked={todo.isCompleted} onChange={() => setAsComplete(todo.id)} />
+                        <span onClick={() => setAsComplete(todo.id)}>{todo.text}</span>
+                    </label>
+                </div>)
+            }
         </>
     )
 }
