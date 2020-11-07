@@ -1,0 +1,74 @@
+body {
+    background-color: rgba(0, 0, 0, 0.4);
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-top: 10%;
+    border-radius: 8px;
+}
+
+h1 {
+    text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+}
+
+.header {
+    margin-top: 2rem;
+}
+
+.todo-heading {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+}
+
+.todo-heading > li > a {
+    text-decoration: none;
+    font-style: italic;
+    color: rgba(54, 255, 47, 0.609);
+    text-shadow: 2px 2px 1px rgba(150, 150, 150, 1);
+}
+
+
+.add-label {
+    display: flex;
+    justify-content: center;
+}
+
+.add-label > input {
+    width: 50%;
+}
+
+h1, h2, h3, p {
+    text-align: center;
+}
+
+h3 {
+    color: rgb(9, 58, 221);
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item > label{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.todo-item > label > input, .todo-item > label > span {
+    margin-right: 2rem;
+}
+
+
+input[type='checkbox']:checked + span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
