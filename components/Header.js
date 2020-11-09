@@ -7,9 +7,9 @@ function Header() {
         <header className='header'>
             <nav>
                 <ul className='todo-heading'> 
-                    <li><Link to='/'>All</Link></li>
-                    <li><Link to='/active'>Active</Link></li>
-                    <li><Link to='/complete'>Complete</Link></li>
+                    <li><Link to='/src/all'>All</Link></li>
+                    <li><Link to='/src/active'>Active</Link></li>
+                    <li><Link to='/src/complete'>Complete</Link></li>
                 </ul>
             </nav>
         </header>

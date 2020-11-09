@@ -1,15 +1,14 @@
 import React from 'react'
 
-function ActiveTodo({ allTodos, setAsComplete }) {
+function ActiveTodo({ isCompleted, id, text, setAsComplete }) {
     return (
         <>
-            {allTodos.filter(todo => !todo.isCompleted).map(todo => 
-                <div className='todo-item' key={todo.id+todo.length+1}>
-                    <label>
-                        <input type='checkbox' checked={todo.isCompleted} onChange={() => setAsComplete(todo.id)} />
-                        <span onClick={() => setAsComplete(todo.id)}>{todo.text}</span>
-                    </label>
-                </div>)
+            {!isCompleted ? 
+                <div className='todo-item'>
+                    <input type='checkbox' onClick={() => setAsComplete(id)} />
+                    <label className={isCompleted ? 'completed' : undefined}>{text}</label>
+                </div>
+                : null
             }
         </>
     )

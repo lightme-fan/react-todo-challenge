@@ -31,7 +31,10 @@ function useTodo() {
 
     // Set a Todo as complete
     function setAsComplete(id) {
-        const completedTodo = allTodos.filter(todo => todo.id === id ? {...todo, isCompleted: !todo.complete} : todo)
+        const completedTodo = allTodos.map(todo => 
+            todo.id === id ? 
+            {...todo, isCompleted: !todo.complete} : 
+            todo)
         setAllTodos(completedTodo)
     }
 
@@ -47,7 +50,7 @@ function useTodo() {
         console.log(active);
     }
 
-    return [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete, activeTodo, activeTodos]
+    return [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete]
 }
 
 export default useTodo

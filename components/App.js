@@ -8,8 +8,9 @@ import Complete from './src/Complete'
 import useTodo from './useTodo'
 
 function App() {
-    const [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete, activeTodo, activeTodos] = useTodo()
+    const [todo, allTodos, handleChange, handleSubmit, deleteTodo, setAsComplete] = useTodo()
    
+
     
     return (
         <article className='container'>
@@ -17,18 +18,23 @@ function App() {
             <AddTodo  value={todo} onChange={handleChange} onClick={handleSubmit}/>
         
             <Header/>
-            <Switch>
-                <Route exact path='/'>
-                    <All allTodos={allTodos} setAsComplete={setAsComplete}/> 
-                </Route>
+            {allTodos.map(todo => 
+                <div key={todo.id+todo.length+1}>
+                    <Switch>
+                        <Route path='/src/all'>
+                            <All {...todo} setAsComplete={setAsComplete}/> 
+                        </Route>
 
-                <Route path='/active'>
-                        <ActiveTodo allTodos={allTodos} setAsComplete={setAsComplete}/>                   
-                </Route>
-                <Route path='/complete'>
-                        <Complete allTodos={allTodos} setAsComplete={setAsComplete} deleteTodo={deleteTodo}/>
-                </Route>
-            </Switch>
+                        <Route path='/src/active'>
+                                <ActiveTodo {...todo} setAsComplete={setAsComplete}/>                   
+                        </Route>
+                        <Route path='/src/complete'>
+                                <Complete {...todo} setAsComplete={setAsComplete} deleteTodo={deleteTodo}/>
+                        </Route>
+                    </Switch>
+                </div>
+            )}
+
         </article>
     )    
 }
